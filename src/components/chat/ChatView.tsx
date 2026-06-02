@@ -895,10 +895,12 @@ export default function ChatView() {
                             } ${isPinned ? 'ring-2 ring-amber-400/50' : ''}`}>
                               {isPinned && <div className="flex items-center gap-1 mb-1"><Pin className="w-3 h-3 text-amber-400" /><span className="text-xs text-amber-400">Pinned</span></div>}
                               {msg.voice_url ? (
-                                <div className="flex items-center gap-2">
-                                  <Mic className="w-4 h-4" />
-                                  <audio src={msg.voice_url} controls className="h-8 max-w-[200px]" />
-                                  {msg.voice_duration && <span className="text-xs opacity-75">{formatVoiceDuration(msg.voice_duration)}</span>}
+                                <div className="flex items-center gap-2 min-w-[180px]">
+                                  <Mic className="w-4 h-4 flex-shrink-0" />
+                                  <audio controls className="h-8 w-full max-w-[200px]" preload="metadata">
+                                    <source src={msg.voice_url} />
+                                  </audio>
+                                  {msg.voice_duration != null && <span className="text-xs opacity-75 flex-shrink-0">{formatVoiceDuration(msg.voice_duration)}</span>}
                                 </div>
                               ) : (
                                 <>
